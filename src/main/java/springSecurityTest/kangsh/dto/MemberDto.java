@@ -15,6 +15,8 @@ public class MemberDto {
     private Long id;
     private String email;
     private String password;
+    private String goon;
+    private String nick;
     private LocalDateTime createdDate;
     private LocalDateTime modifyDate;
 
@@ -23,13 +25,17 @@ public class MemberDto {
                 .id(id)
                 .email(email)
                 .password(password)
+                .goon(goon)
+                .nick(nick)
                 .build();
     }
 
     @Builder
-    public MemberDto(Long id, String email, String password) {
+    public MemberDto(Long id, String email, String password, String goon, String nick) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.goon = goon;
+        this.nick = nick;
     }
 }

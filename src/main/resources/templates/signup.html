@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>회원가입 페이지</title>
+    <title>은하수|회원가입</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
+
 <body>
-<h1>은하수 웹 회원 가입</h1>
-<hr>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">EunHa</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">멤버</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">게시판</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/info}">내정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <form th:action="@{/user/signup}" method="post">
-    <input type="text" name="email" placeholder="이메일 입력해주세요">
-    <input type="password" name="password" placeholder="비밀번호">
-    <button type="submit">가입하기</button>
+    <div class="form-group">
+        <label for="email">아이디</label>
+        <input type="text" name="email" class="form-control" placeholder="아이디를 입력하세요" id="email">
+    </div>
+    <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password">
+    </div>
+    <div class="form-group">
+        <label for="nick">닉네임</label>
+        <input type="text" name="nick" class="form-control" placeholder="은하수 닉네임을 입력하세요" id="nick">
+    </div>
+    <div class="form-group">
+        <label for="goon">본인 군(EX: 강주력, 주력, 1군...)</label>
+        <input type="text" name="goon" class="form-control" placeholder="본인의 군을 입력하세요" id="goon">
+    </div>
+    <div class="login_btn">
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </div>
 </form>
+
+
 </body>
 </html>

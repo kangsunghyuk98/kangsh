@@ -47,7 +47,7 @@
     </div>
 </nav>
 
-<div class="container" sec:authentication="email">
+<div class="container">
     <h2>은하수 멤버</h2>
     <p>은하수 모든 멤버 조회입니다</p>
     <table class="table table-striped">
@@ -59,10 +59,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="memberEntityList : ${memberEntityList}">
-            <td th:text="${memberEntityList.nick}">은하수풀떼기</td>
-            <td th:text="${memberEntityList.email}">풀떼기</td>
-            <td th:text="${memberEntityList.goon}">쌉강주력</td>
+        <tr th:each="member : ${member}">
+            <td th:text="${member.nick}">은하수풀떼기</td>
+            <td th:text="${member.email}">풀떼기</td>
+            <td th:text="${member.goon}">쌉강주력</td>
         </tr>
         </tbody>
     </table>

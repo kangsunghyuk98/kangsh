@@ -1,6 +1,7 @@
 package springSecurityTest.kangsh.service;
 
 import lombok.AllArgsConstructor;
+import org.apache.catalina.security.SecurityUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -49,4 +50,9 @@ public class MemberService implements UserDetailsService {
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
 
     }
+
+    public List<MemberEntity> memberEntityList() {
+        return memberRepository.findAll();
+    }
+
 }
