@@ -20,8 +20,13 @@ public class BoardEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardId; // 게시글 번호
 
+    @Column(length = 50, nullable = false)
     private String title; //게시글 제목
+
+    @Lob
     private String content; // 게시글 내용
+
+    @Column(length = 30, nullable = false)
     private String writer; // 게시글 작성자
 
     @CreationTimestamp

@@ -8,6 +8,7 @@ import springSecurityTest.kangsh.repository.BoardRepository;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
