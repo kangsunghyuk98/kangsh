@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>은하수</title>
+    <title>은하수|게시판</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">EunHa</a>
+        <a class="navbar-brand" th:href="@{/}">EunHa</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,9 +47,32 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <h3>은하수 인덱스 페이지입니다</h3>
-    <p>내용</p>
+<div class="container">
+    <h2>은하수 게시판</h2>
+    <p>은하수 게시판입니다</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${board}">
+            <td th:text="${board.boardId}">1</td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/board/detail/{boardId}(boardId=${board.boardId})}">
+                    풀떼기 잘생겼다 생각해본적 없는데..
+                </a>
+            </td>
+            <td th:text="${board.writer}">차동현</td>
+            <td th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" onclick="location.href='/board/register'">글쓰기</button>
 </div>
 
 </body>

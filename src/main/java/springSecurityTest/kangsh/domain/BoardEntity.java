@@ -1,11 +1,11 @@
 package springSecurityTest.kangsh.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import springSecurityTest.kangsh.dto.MemberDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,12 +13,11 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "board")
 public class BoardEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer boardId; // 게시글 번호
+    private Long boardId; // 게시글 번호
 
     @Column(length = 50, nullable = false)
     private String title; //게시글 제목
@@ -36,5 +35,14 @@ public class BoardEntity {
     @UpdateTimestamp
     private LocalDateTime updateTime; // 수정시간
 
+    @Builder
+    public BoardEntity(Long boardId, String title, String content, String writer, LocalDateTime createdTime, LocalDateTime updateTime) {
+        this.boardId = boardId;
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.createdTime = createdTime;
+        this.updateTime = updateTime;
+    }
 
 }

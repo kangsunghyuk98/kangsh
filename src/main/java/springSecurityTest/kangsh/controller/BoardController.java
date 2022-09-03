@@ -2,6 +2,7 @@ package springSecurityTest.kangsh.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import springSecurityTest.kangsh.service.BoardService;
 @RequiredArgsConstructor
 @RequestMapping("/board") //url board로 1차 분류
 public class BoardController {
-
+    @Autowired
     private BoardService boardService;
 
     @GetMapping("/list")
@@ -25,7 +26,7 @@ public class BoardController {
     } //작성글 조회 뷰 매핑
 
     @GetMapping("/detail/{boardId}")
-    public String boardDetail(@PathVariable Integer boardId, Model model) {
+    public String boardDetail(@PathVariable Long boardId, Model model) {
         model.addAttribute("board", boardService.boardDetail(boardId));
         return "detail";
     } // 작성글 세부정보 조회 뷰 매핑
@@ -42,7 +43,7 @@ public class BoardController {
     } // 글쓰기 페이지 매핑
 
     @GetMapping("/update/{boardId}")
-    public String boardupdateView(@PathVariable Integer boardId, Model model) {
+    public String boardupdateView(@PathVariable Long boardId, Model model) {
         model.addAttribute("board", boardService.boardDetail(boardId));
         return "update";
     } // 게시판 글 수정 뷰 GET 매핑
@@ -51,7 +52,13 @@ public class BoardController {
     public String boardupdatePost(BoardEntity boardEntity) {
         boardService.boardUpdate(boardEntity);
         return "redirect:/board/list";
-    } // 게시판 글 수정 매핑
+    } // 게시판 글 수정 매핑 (20220831)
+
+    @GetMapping("/delete/{boardId}")
+    public String boardDelete(@PathVariable Long boardId) {
+        boardService.boardDelete(boardId);
+        return "redirect:/board/list";
+    } // 게시판 글 삭제 매핑
 
 
 

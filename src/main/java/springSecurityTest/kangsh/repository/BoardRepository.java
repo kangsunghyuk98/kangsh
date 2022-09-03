@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import springSecurityTest.kangsh.domain.BoardEntity;
 
 @Repository
-public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
+public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 
 }

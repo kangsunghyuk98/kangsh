@@ -22,7 +22,7 @@ public class BoardService {
         return boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardId"));
     } // 글 조회(게시글 번호 순서대로 내림차순 정렬함)
 
-    public BoardEntity boardDetail(Integer boardId) {
+    public BoardEntity boardDetail(Long boardId) {
         return boardRepository.findById(boardId).orElse(null);
     } // 글 상세 정보 조회 (orElse사용해서 optional로 감싸져있는 findById를 엔티티로 바로 쓰려고)
 
@@ -30,7 +30,7 @@ public class BoardService {
         boardRepository.save(boardEntity);
     } // 글 수정(save랑 로직 같음 데이터 있으면 수정한다)\
 
-    public void boardDelete(Integer boardId) {
+    public void boardDelete(Long boardId) {
         boardRepository.deleteById(boardId);
     } // 글 삭제
 
