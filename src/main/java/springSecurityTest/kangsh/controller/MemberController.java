@@ -22,12 +22,12 @@ public class MemberController {
 
     @GetMapping("/") // 메인페이지
     public String index(){
-        return "/index";
+        return "Milky/index2";
     }
 
     @GetMapping("/user/signup") // 회원가입 페이지
     public String dispSignup(){
-        return "/signup";
+        return "Milky/signup";
     }
 
     @PostMapping("/user/signup") // 회원가입 처리
@@ -39,7 +39,7 @@ public class MemberController {
     
     @GetMapping("/user/login") // 로그인 페이지
     public String dispLogin() {
-        return "/login";
+        return "Milky/login";
     }
 
     @GetMapping("/user/login/result") // 로그인 결과 페이지

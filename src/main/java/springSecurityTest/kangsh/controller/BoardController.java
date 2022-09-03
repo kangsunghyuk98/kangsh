@@ -22,7 +22,7 @@ public class BoardController {
     @GetMapping("/list")
     public String Boardlist(Model model) {
         model.addAttribute("board", boardService.list());
-        return "list";
+        return "boardlist";
     } //작성글 조회 뷰 매핑
 
     @GetMapping("/detail/{boardId}")
@@ -33,7 +33,7 @@ public class BoardController {
 
     @GetMapping("/register")
     public String boardregistView() {
-        return "register";
+        return "/Milky/register";
     } // 글쓰기 페이지 뷰만 GET 매핑
 
     @PostMapping("/register")

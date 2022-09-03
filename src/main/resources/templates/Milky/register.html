@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="{{ url_for('static', filename='css/style.css') }}"
+      rel="stylesheet"
+    />
+   
+    <!-- <link rel="stylesheet" href="default.css"> -->
+    <title>Hello</title>
+    <style>
+      html {
+        background-color: whitesmoke;
+        scroll-behavior: smooth;
+      }
+
+      a{
+        text-decoration : none;
+        color: black;
+      }
+
+      /* a :hover{
+        transform: scale(1.2);
+      } */
+
+      header {
+        width: 100%;
+        height: 60px;
+        /* border: 1px solid black; */
+      }
+
+      header .spot {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: black;
+      }
+
+      footer {
+        width: 100%;
+        height: 50px;
+        /* border: 1px solid black; */
+      }
+
+      ul {
+        list-style: none;
+      }
+      li {
+        float: left;
+        margin-right: 20px;
+      }
+
+      .sidebar {
+        position: absolute;
+        top: 175px;
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        overflow-x: hidden;
+        padding-top: 60px;
+        transition: 0.7s;
+      }
+
+      .sidebar a {
+        padding: 8px 8px 8px 32px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-decoration: none;
+        font-size: 1.4rem;
+        color: black;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+
+      .openbtn {
+        font-size: 25px;
+        cursor: pointer;
+        /* background-color: #2b9348; */
+        color: black;
+        padding: 10px 15px;
+        border: none;
+      }
+
+      .openbtn:hover {
+        background-color: gray;
+      }
+
+      #main {
+        margin: 0 auto;
+        position: relative;
+        /* width: 1440px; */
+        height: 850px;
+        /* border: 1px solid black; */
+      }
+
+      #maintext {
+        position: absolute;
+        top: 345px;
+        left: 470px;
+        font-size: 60px;
+        color: #f41f56;
+        font-weight: 700;
+        z-index: 2;
+      }
+
+      #mainsubtext {
+        position: absolute;
+        top: 460px;
+        left: 470px;
+        width: 230px;
+      }
+
+      #mainsubtext > p:nth-child(1) {
+        font-size: 30px;
+      }
+      #mainsubtext > p:nth-child(2) {
+        font-size: 15px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      #mainimg {
+        width: 100%;
+        height: 850px;
+        position: absolute;
+        /* top: 112px; */
+        /* left: 240px; */
+        top: 0;
+        z-index: 2;
+      }
+
+      #mainimg > img {
+        max-width: 100%;
+      }
+
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        width: 100%;
+        height: 100%;
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal.show {
+        display: block;
+        
+      }
+
+      .modal_body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 400px;
+        height: 400px;
+
+        padding: 40px;
+
+        text-align: center;
+
+        background-color: whitesmoke;
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+       
+      }
+
+      .form {
+        background-color: #f0f0f0;
+        /* border-radius: 20px; */
+        box-sizing: border-box;
+        height: 400px;
+        padding: 40px;
+        margin: auto;
+        width: 400px;
+        box-shadow: 0px 8px 33px #999;
+      }
+
+      .UI {
+        margin-top: 10px;
+        /* border : 1px solid red; */
+      }
+
+      textarea {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        resize: none;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 1px solid white;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 15px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        /* border: none; */
+        background-color: white;
+        color: black;
+        border-radius: 10px;
+        border: 1px solid white;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        background-color: skyblue;
+        color: white;
+        transition: all 0.3s;
+        border-radius: 10px;
+      }
+
+      input[type="submit"]:hover {
+        transform: scale(1.2);
+      }
+
+      .register_form{
+        padding: 40px;
+        margin: auto;
+        width: 400px;
+      }
+
+      img{
+        width: 100%;
+      }
+
+      footer {
+  padding-top: 60px;
+}
+
+footer .top {
+  /* padding-top : 100px; */
+  background: #383f43;
+  /* border: 1px solid red; */
+}
+
+footer .top > div {
+  width: 1080px;
+  margin: 0 auto;
+  padding: 13px 0;
+}
+
+footer .top > div ul {
+  float: left;
+  position: relative;
+  top: 0px;
+}
+
+footer .top > div ul li {
+  float: left;
+  position: relative;
+  padding: 0 9px 0 0;
+}
+
+footer .top > div ul li :after {
+  content: "";
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  width: 1px;
+  height: 8px;
+  margin-top: -4px;
+  background: #70767a;
+}
+
+footer .top > div ul li :last-child :after {
+  display: none;
+}
+
+footer .top > div ul li a {
+  color: #fff;
+  font-size: 13px;
+  line-height: 45px;
+  /* border : 1px solid red; */
+}
+
+footer .top > div div {
+  float: right;
+  padding-top: 14px;
+}
+
+footer .top > div div p {
+  display: inline-block;
+  width: 242px;
+  height: 45px;
+  background: #2a3033;
+  color: #fff;
+  text-align: center;
+  line-height: 45px;
+  font-size: 13px;
+}
+
+footer .top > div div p strong {
+  padding: 0 0 0 15px;
+  font-size: 20px;
+}
+
+footer .top > div div select {
+  padding: 0 0 0 21px;
+  width: 200px;
+  height: 44px;
+  color: #191919;
+  font-size: 12px;
+  box-sizing: border-box;
+  border: none;
+  vertical-align: 3px;
+}
+
+footer .btm {
+  padding: 40px 0 44px;
+  background: #4c5459;
+  text-align: center;
+}
+
+footer .btm p {
+  display: inline-block;
+  width: 150px;
+  height: 51px;
+  background: url("img/title_logo.png") no-repeat;
+  color: transparent;
+}
+
+footer .btm li {
+  display: inline-block;
+  position: relative;
+  padding: 0 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+footer .btm li :after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -4px;
+  width: 1px;
+  height: 8px;
+  background: #70767a;
+}
+
+footer .btm address {
+  font-size: 14px;
+  color: #fff;
+}
+
+table{
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table.type07 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  /* margin: 20px 10px; */
+}
+table.type07 thead {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  background: skyblue;
+}
+table.type07 thead th {
+  padding-left: 50px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #fff;
+  /* border: 1px solid; */
+}
+table.type07 tbody th {
+  width: 400px;
+  /* padding: 10px; */
+  font-weight: bold;
+  padding-top: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  /* background: #fcf1f4; */
+  margin-top: 100px;
+  /* border: 1px solid; */
+}
+table.type07 td {
+  width: 100px;
+  padding-left: 50px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  /* border: 1px solid red; */
+}
+
+    </style>
+  </head>
+  <body>
+      <div class="modal">
+        <div class="modal_body">
+          <section class="content">
+            <div>
+              <h1>LOG-IN</h1>
+                <form action="/user/login"
+                      method="post"
+                      style="text-align: center"
+                >
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <p class="UI">
+                        <input type="text" name="username" placeholder="아이디" />
+                    </p>
+                    <p class="UI">
+                        <input type="password" name="password" placeholder="비밀번호" />
+                    </p>
+                    <p class="UI">
+                        <input class="submit" type="submit" value="로그인" />
+                    </p>
+                </form>
+            </div>
+          </section>
+        </div>
+      </div>
+      <header>
+        <button
+          class="openbtn"
+          onclick="openSidebar()"
+          style="background-color: whitesmoke"
+        >
+          &#9776;
+        </button>
+        <nav class="spot">
+          <ul>
+              <li>
+                  <a class="btn-open-popup" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+              </li>
+              <li>
+                  <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+              </li>
+              <li>
+                  <a class="btn-open-popup" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원 가입</a>
+              </li>
+          </ul>
+        </nav>
+      </header>
+      <nav>
+        <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()"
+            >&times;</a
+          >
+            <a th:href="@{/}">Home</a>
+            <a href= "#Anchorname">Introduce</a>
+            <a th:href="@{/user/allmembers}">Members</a>
+            <a href="#">Match</a>
+            <a href="#">League</a>
+            <a th:href="@{/board/list}">Q&A</a>
+        </div>
+      </nav>
+      <div id="main">
+        <form th:action="@{/board/register}" method="post">
+          <p class = "UI"><input type="text" name="title" placeholder="제목"></p>
+            <p class = "UI"><input type="text" name="writer" placeholder="작성자"></p>
+          <p class = "UI"><textarea name="content" style="width:100%; height: 450px;  resize:none;" placeholder="본문을 남겨주세요!"></textarea></p>
+          <p class = "UI"><input class = "submit" type="submit" value = "완료" style = "width : 10%; float : right; margin-right : 15px;"></p>
+        </form>
+      </div>
+        
+          <!--      <div class="background-wrapper bottom"></div>-->
+        <!-- <div class="intro-video-wrapper">
+          <div id="content-wrapper" style="height : 100vh !important;">
+            <div id="background-wrapper-video" style="height : 100%;">
+            <div class="background-wrapper top"></div>
+            <video id="intro-video" loop autoplay muted="muted" playsinline><source src="https://onnuristorage.s3.ap-northeast-2.amazonaws.com/aftercare/contents/main.mp4" type="video/mp4"></source></video><div class="background-wrapper bottom"></div>
+          </div>
+        </div> -->
+      </a>
+      <footer><footer>                      
+        <div class="top">
+            <div class = "clear">
+                <ul>
+                    <li><a href="#a">Front-end</a></li>
+                    <li><a href="#a">Back-end</a></li>
+                </ul>
+                <div>
+                    <p>질의 문의<strong>080-777-2299</strong></p>
+                    <select>
+                        <option>COMSIN</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="btm">
+            <p>컴신</p>
+            <ul>
+                <!-- <li>충청남도 천안시 동남구 백석대학로 1</li> -->
+                <li>Tel 000-0000-0000</li>
+                <li>개인정보취급관리자 서동원</li>
+                <li>email - kirin2211@naver.com </li>
+            </ul>
+            <address>EunHaSoo Copyright 2022, All Rights Reserved</address>
+        </div></footer>
+    </div>
+  </body>
+  <script>
+   
+   
+
+    var myVar;
+
+    function myFunction() {
+      myVar = setTimeout(showPage, 1000);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+  }
+    const openSidebar = () => {
+      document.getElementById("mySidebar").style.width = "250px";
+      // document.getElementById("main").style.marginLeft = "250px";
+    };
+
+    const closeSidebar = () => {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    };
+
+
+    const body = document.querySelector("body");
+    const modal = document.querySelector(".modal");
+    const btnOpenPopup = document.querySelector("li .btn-open-popup");
+
+    btnOpenPopup.addEventListener("click", () => {
+      modal.classList.toggle("show");
+
+      if (modal.classList.contains("show")) {
+        body.style.overflow = "hidden";
+      }
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.toggle("show");
+
+        if (!modal.classList.contains("show")) {
+          body.style.overflow = "auto";
+        }
+      }
+    });
+
+    var slideIndex = 0;
+    showSlides();
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      setTimeout(showSlides, 5000); // 5초에 한번씩 이미지가 바뀜
+    }
+  </script>
+</html>

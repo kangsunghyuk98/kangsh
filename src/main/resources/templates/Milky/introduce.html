@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="default.css">
+          <br><br><br>
+    <title>은하수</title>
+
+    <style>
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .modal.show {
+        display: block;
+      }
+
+      .modal_body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 400px;
+        height: 400px;
+
+        padding: 40px;
+
+        text-align: center;
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="modal">
+      <div class="modal_body">
+        <section class="content">      
+        
+            <div>
+            <h1>LOG-IN</h1>
+            <form action="/auth/login_process" method="post" style = "text-align : center">
+            <p class = "UI"><input type="text" name="email" placeholder="E-mail"></p>
+            <p class = "UI"><input type = "password" name = "password" placeholder = "Password"></p>
+            <p class = "UI"><input class = "submit" type="submit" value = "로그인"></p>
+            </form></div>
+              
+                </section>
+      </div>
+    </div>
+    <header>
+        <h1><a href="main.html">은하수 클럽</a></h1>      
+        <nav class = "lnb">
+        
+        <ul>
+                <li>
+                    <a href="#" class="dropbtn" style="color : rgb(30,80,133)">클럽 소개</a>
+                </li>
+                <li class="dropdown">
+                <a href="#" class="dropbtn" style="color : rgb(30,80,133)">멤버</a>
+                <div class="dropdown-content">
+                    <a href="#">클럽장</a>
+                    <a href="#">운영진</a>
+                    <a href="#">클럽원</a>
+                </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn" style="font-size : 15px; color : rgb(30,80,133)">매칭</a>
+                    <!-- <div class="dropdown-content">
+                        <a href="/topic/GC_ASUS">아수스</a>
+                        <a href="/topic/GC_EmTek">이엠텍</a>
+                        <a href="/topic/GC_Galax">갤럭시</a>
+                    </div> -->
+                </li>
+                
+               
+                <li>
+                    <a href="" style="color : rgb(30,80,133)">게시판</a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropbtn" style="color : rgb(30,80,133)">기타</a>
+                    <div class="dropdown-content">
+                        <a href="#">세부리스트</a>
+                    </div>
+                </li>
+            </ul>
+                    
+        </nav>
+        <nav class="spot">       
+            <ul>
+             
+            <li>
+                <a class="btn-open-popup">로그인</a>
+            </li>
+            <li>
+                <a class="btn-open-popup">회원 가입</a>
+            </li>
+            </ul>
+        </header>
+        
+       
+
+       클럽의 소개가 들어갈 란 입니다.
+        
+  </body>
+  <script>
+    const body = document.querySelector("body");
+    const modal = document.querySelector(".modal");
+    const btnOpenPopup = document.querySelector("li .btn-open-popup");
+
+    btnOpenPopup.addEventListener("click", () => {
+      modal.classList.toggle("show");
+
+      if (modal.classList.contains("show")) {
+        body.style.overflow = "hidden";
+      }
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.toggle("show");
+
+        if (!modal.classList.contains("show")) {
+          body.style.overflow = "auto";
+        }
+      }
+    });
+    var slideIndex = 0;
+    showSlides();
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 5000); // 5초에 한번씩 이미지가 바뀜
+    }
+  </script>
+</html>
