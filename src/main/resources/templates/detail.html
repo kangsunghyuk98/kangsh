@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>은하수|게시판</title>
+    <title>은하수|글보기</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -51,29 +51,23 @@
 </nav>
 
 <div class="container">
-    <h2>은하수 게시판</h2>
-    <p>은하수 게시판입니다</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="board : ${board}">
-            <td>
-                <a th:text="${board.title}" th:href="@{/board/detail/{boardId}(boardId=${board.boardId})}">
-                    풀떼기 잘생겼다 생각해본적 없는데..
-                </a>
-            </td>
-            <td th:text="${board.writer}">차동현</td>
-            <td th:text="${#temporals.format(board.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-primary" sec:authorize="hasRole('ROLE_MEMBER')" onclick="location.href='/board/register'">글쓰기</button>
+    <h2>글보기</h2>
+    <div class="form-group">
+        <label for="writer">작성자:</label>
+        <input type="text" id="writer" class="form-control form-control-sm" name="writer" th:value="${board.writer}" disabled>
+    </div>
+        <div class="form-group">
+            <label for="title">제목:</label>
+            <input type="text" id="title" class="form-control form-control-sm" name="title" th:value="${board.title}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="content">내용:</label>
+            <textarea class="form-control" rows="5" id="content" name="content" th:text="${board.content}" disabled></textarea>
+        </div>
+    <div th:if="${#authentication.getPrincipal().getUsername() eq board.writer}">
+        <a th:href="@{/board/update/{boardId}(boardId=${board.boardId})}" class="btn btn-info" role="button">수정</a>
+        <a th:href="@{/board/delete/{boardId}(boardId=${board.boardId})}" class="btn btn-info" role="button">삭제</a>
+    </div>
 </div>
 
 </body>

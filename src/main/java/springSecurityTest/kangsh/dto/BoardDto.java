@@ -31,6 +31,7 @@ public class BoardDto {
                 .createdTime(createdTime)
                 .updateTime(updateTime)
                 .build();
+
     }
 
         @Builder

@@ -35,6 +35,7 @@ public class BoardEntity {
     @UpdateTimestamp
     private LocalDateTime updateTime; // 수정시간
 
+
     @Builder
     public BoardEntity(Long boardId, String title, String content, String writer, LocalDateTime createdTime, LocalDateTime updateTime) {
         this.boardId = boardId;
